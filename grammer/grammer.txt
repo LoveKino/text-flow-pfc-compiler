@@ -1,0 +1,8 @@
+ARTICLE := REGION
+    | REGION ARTICLE
+
+REGION := TEXT
+    | startDelimiter TEXT endDelimiter
+
+TEXT := letter
+    | letter TEXT

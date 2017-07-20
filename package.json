@@ -20,5 +20,15 @@
     "compiler"
   ],
   "author": "ddchen",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "bnfer": "0.0.5",
+    "es6-promisify": "^5.0.0",
+    "mocha": "^3.4.2"
+  },
+  "dependencies": {
+    "pfc-compiler": "0.0.3",
+    "stream-token-parser": "0.0.4",
+    "syntaxer": "0.0.12"
+  }
 }
