@@ -1,0 +1,20 @@
+{
+  "name": "text-flow-pfc-compiler",
+  "version": "0.0.1",
+  "description": "text embed pfc compiler",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha test/function/**/*.js"
+  },
+  "keywords": [
+    "text",
+    "embed",
+    "pfc",
+    "compiler"
+  ],
+  "author": "ddchen",
+  "license": "MIT"
+}
