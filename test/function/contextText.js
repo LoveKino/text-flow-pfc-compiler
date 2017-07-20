@@ -51,6 +51,69 @@ let testData = [{
         type: 'text',
         text: 'text3'
     }]
+}, {
+    code: 'word1 word2{:beforeWords:}',
+    result: [{
+        type: 'text',
+        text: 'word1 word2'
+    }, {
+        type: 'pfc',
+        value: ['word1', 'word2']
+    }]
+}, {
+    code: 'word1 word2{:forwardWords:}',
+    result: [{
+        type: 'text',
+        text: 'word1 word2'
+    }, {
+        type: 'pfc',
+        value: ['word2', 'word1']
+    }]
+}, {
+    code: 'word1 {:forwardWords:}   word2  {:forwardWords:}',
+    result: [{
+        type: 'text',
+        text: 'word1 '
+    }, {
+        type: 'pfc',
+        value: ['word1']
+    }, {
+        type: 'text',
+        text: '   word2  '
+    }, {
+        type: 'pfc',
+        value: ['word2', 'word1']
+    }]
+}, {
+    code: 'word1 {:beforeWords:}   word2  {:beforeWords:}',
+    result: [{
+        type: 'text',
+        text: 'word1 '
+    }, {
+        type: 'pfc',
+        value: ['word1']
+    }, {
+        type: 'text',
+        text: '   word2  '
+    }, {
+        type: 'pfc',
+        value: ['word1', 'word2']
+    }]
+}, {
+    code: '{:afterWords:} word1{:afterWords:}word2',
+    result: [{
+        type: 'pfc',
+        value: ['word1', 'word2']
+    }, {
+        type: 'text',
+        text: ' word1'
+    }, {
+        type: 'pfc',
+        value: ['word2']
+    }, {
+        type: 'text',
+        text: 'word2'
+    }]
 }];
 
 describe('contextText', () => {

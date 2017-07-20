@@ -10,20 +10,43 @@ module.exports = (item, index, array) => {
     let currentToken = item;
 
     let beforeTexts = [],
+        beforeWords = [],
         forwardTexts = [],
-        afterTexts = [];
+        forwardWords = [],
+        afterTexts = [],
+        afterWords = [];
+
     for (let i = 0; i < beforeTokens.length; i++) {
         let beforeToken = beforeTokens[i];
         if (beforeToken.type === 'text') {
-            beforeTexts.push(beforeToken.text);
-            forwardTexts.unshift(beforeToken.text);
+            let text = beforeToken.text;
+            let words = text.split(' ');
+            beforeTexts.push(text);
+            forwardTexts.unshift(text);
+            for (let j = 0; j < words.length; j++) {
+                let word = words[j];
+                word = word.trim();
+                if (word) {
+                    beforeWords.push(word);
+                    forwardWords.unshift(word);
+                }
+            }
         }
     }
 
     for (let i = 0; i < afterTokens.length; i++) {
         let afterToken = afterTokens[i];
         if (afterToken.type === 'text') {
-            afterTexts.push(afterToken.text);
+            let text = afterToken.text;
+            afterTexts.push(text);
+            let words = text.split(' ');
+            for (let j = 0; j < words.length; j++) {
+                let word = words[j];
+                word = word.trim();
+                if (word) {
+                    afterWords.push(word);
+                }
+            }
         }
     }
 
@@ -33,6 +56,9 @@ module.exports = (item, index, array) => {
         currentToken,
         beforeTexts,
         afterTexts,
-        forwardTexts
+        forwardTexts,
+        beforeWords,
+        forwardWords,
+        afterWords
     };
 };
