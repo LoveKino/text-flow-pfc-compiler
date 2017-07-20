@@ -1,6 +1,6 @@
 {
   "name": "text-flow-pfc-compiler",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "text embed pfc compiler",
   "main": "index.js",
   "directories": {
@@ -29,7 +29,7 @@
     "mocha": "^3.4.2"
   },
   "dependencies": {
-    "pfc-compiler": "0.0.3",
+    "pfc-compiler": "^0.1.7",
     "stream-token-parser": "0.0.4",
     "syntaxer": "0.0.12"
   }

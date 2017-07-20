@@ -1,7 +1,9 @@
 'use strict';
 
 let {
-    compiler
+    parseStrToAst,
+    executeAST,
+    checkASTWithContext
 } = require('../..');
 
 let assert = require('assert');
@@ -47,7 +49,9 @@ describe('index', () => {
         code, result, sandboxer
     }) => {
         it(code, () => {
-            let ret = compiler(code)(sandboxer);
+            let ast = parseStrToAst(code);
+            checkASTWithContext(code, sandboxer);
+            let ret = executeAST(ast, sandboxer);
             assert.deepEqual(ret, result);
         });
     });

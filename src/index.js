@@ -100,11 +100,9 @@ let parser = (options) => {
     };
 };
 
-/**
- * translate ast
- */
-let translate = (mid, sandboxer = noop) => {
+let executeAST = (mid, sandboxer = noop) => {
     let result = [];
+
     for (let i = 0; i < mid.length; i++) {
         let item = mid[i];
         let type = item.type;
@@ -113,7 +111,7 @@ let translate = (mid, sandboxer = noop) => {
             let variableMap = sandboxer(item, i, mid); // generate variableMap with current context [item, i, mid]
             result.push({
                 type: 'pfc',
-                value: pfcCompiler.translate(pfcAst, variableMap)
+                value: pfcCompiler.executeAST(pfcAst, variableMap)
             });
         } else if (type === 'text') {
             result.push(item);
@@ -123,9 +121,16 @@ let translate = (mid, sandboxer = noop) => {
     return result;
 };
 
-let compiler = (str, options) => {
-    let mid = parseStrToAst(str, options);
-    return (sandboxer) => translate(mid, sandboxer);
+let checkASTWithContext = (mid, sandboxer = noop) => {
+    for (let i = 0; i < mid.length; i++) {
+        let item = mid[i];
+        let type = item.type;
+        if (type === 'pfc') {
+            let pfcAst = item.pfcAst;
+            let variableMap = sandboxer(item, i, mid); // generate variableMap with current context [item, i, mid]
+            pfcCompiler.checkASTWithContext(pfcAst, variableMap);
+        }
+    }
 };
 
 let parseStrToAst = (str, options) => {
@@ -146,6 +151,7 @@ const noop = () => {};
 
 module.exports = {
     parser,
-    translate,
-    compiler
+    parseStrToAst,
+    executeAST,
+    checkASTWithContext
 };

@@ -1,13 +1,14 @@
 'use strict';
+
 let {
-    compiler
+    parseStrToAst
 } = require('../..');
 let assert = require('assert');
 
 describe('exception', () => {
     it('start delimiter is not string', () => {
         try {
-            compiler('123', {
+            parseStrToAst('123', {
                 startDelimiter: 123
             });
         } catch (err) {
@@ -17,7 +18,7 @@ describe('exception', () => {
 
     it('end delimiter is not string', () => {
         try {
-            compiler('123', {
+            parseStrToAst('123', {
                 endDelimiter: 123
             });
         } catch (err) {
@@ -27,7 +28,7 @@ describe('exception', () => {
 
     it('equal start and end delimiter', () => {
         try {
-            compiler('123', {
+            parseStrToAst('123', {
                 endDelimiter: '|',
                 startDelimiter: '|'
             });

@@ -1,7 +1,9 @@
 'use strict';
 
 let {
-    compiler
+    parseStrToAst,
+    executeAST,
+    checkASTWithContext
 } = require('../..');
 let assert = require('assert');
 let contextText = require('../../apply/contextText');
@@ -121,7 +123,9 @@ describe('contextText', () => {
         code, result
     }) => {
         it(code, () => {
-            let ret = compiler(code)(contextText);
+            let ast = parseStrToAst(code);
+            checkASTWithContext(code, contextText);
+            let ret = executeAST(ast, contextText);
             assert.deepEqual(ret, result);
         });
     });
