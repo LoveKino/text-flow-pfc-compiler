@@ -6,6 +6,10 @@
   "directories": {
     "test": "test"
   },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:LoveKino/text-flow-pfc-compiler.git"
+  },
   "scripts": {
     "test": "mocha test/function/**/*.js"
   },
