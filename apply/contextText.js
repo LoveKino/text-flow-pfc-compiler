@@ -59,6 +59,8 @@ module.exports = (item, index, array) => {
         forwardTexts,
         beforeWords,
         forwardWords,
-        afterWords
+        afterWords,
+        tokens: array,
+        tokenIndex: index
     };
 };
