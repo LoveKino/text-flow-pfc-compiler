@@ -62,7 +62,9 @@ let parser = (options) => {
     let lr1Parse = LR(ACTION, GOTO, {
         reduceHandler: (production, midNode) => {
             let productionId = getProductionId(production);
-            if (productionId === 'ARTICLE := REGION') {
+            if (productionId === 'ARTICLE :=') {
+                midNode.value = [];
+            } else if (productionId === 'ARTICLE := REGION') {
                 midNode.value = [midNode.children[0].value];
             } else if (productionId === 'ARTICLE := REGION ARTICLE') {
                 midNode.value = [midNode.children[0].value].concat(midNode.children[1].value);
@@ -144,7 +146,7 @@ let parseStrToAst = (str, options) => {
 };
 
 let getProductionId = (production) => {
-    return `${production[0]} := ${production[1].join(' ')}`;
+    return `${production[0]} := ${production[1].join(' ')}`.trim();
 };
 
 const noop = () => {};

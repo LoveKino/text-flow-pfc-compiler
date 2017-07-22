@@ -9,6 +9,9 @@ let {
 let assert = require('assert');
 
 let testData = [{
+    code: '',
+    result: []
+}, {
     code: '1234',
     result: [{
         type: 'text',

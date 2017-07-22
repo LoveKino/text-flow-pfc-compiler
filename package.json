@@ -1,6 +1,6 @@
 {
   "name": "text-flow-pfc-compiler",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "text embed pfc compiler",
   "main": "index.js",
   "directories": {
