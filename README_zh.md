@@ -55,7 +55,7 @@ console.log(ret);
 输出
 
     [ { type: 'text', text: 'today is \n' },
-      { type: 'pfc', value: '2017.7.20' } ]
+      { type: 'pfc', value: '2017.7.20', code: 'date()' } ]
 
 ```
 
@@ -67,6 +67,8 @@ console.log(ret);
 ```
 .    
 │──README.md    
+│──README_zh.md    
+│──TODO.md    
 │──apply    
 │   └──contextText.js    
 │──build    

@@ -33,5 +33,14 @@
     "pfc-compiler": "^0.1.7",
     "stream-token-parser": "0.0.4",
     "syntaxer": "0.0.12"
+  },
+  "readmeDocOptions": {
+    "ignores": [
+      "**/*/node_modules/**/*",
+      "node_modules/**/*",
+      "test/**/*",
+      "coverage/**/*"
+    ]
   }
+
 }
