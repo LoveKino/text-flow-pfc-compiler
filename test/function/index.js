@@ -29,7 +29,8 @@ let testData = [{
         text: 'hello '
     }, {
         type: 'pfc',
-        value: 'world!'
+        value: 'world!',
+        code: 'world'
     }]
 }, {
     code: 'today is \n{:date():}',
@@ -43,7 +44,8 @@ let testData = [{
         text: 'today is \n'
     }, {
         type: 'pfc',
-        value: '2017.7.20'
+        value: '2017.7.20',
+        code: 'date()'
     }]
 }];
 

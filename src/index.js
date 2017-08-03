@@ -74,9 +74,11 @@ let parser = (options) => {
                     text: midNode.children[0].value
                 };
             } else if (productionId === 'REGION := startDelimiter TEXT endDelimiter') {
+                let pfcCode = midNode.children[1].value;
                 midNode.value = {
                     type: 'pfc',
-                    pfcAst: pfcCompiler.parseStrToAst(midNode.children[1].value)
+                    pfcAst: pfcCompiler.parseStrToAst(pfcCode),
+                    code: pfcCode
                 };
             } else if (productionId === 'TEXT := letter') {
                 midNode.value = midNode.children[0].token.text;
@@ -113,7 +115,8 @@ let executeAST = (mid, sandboxer = noop) => {
             let variableMap = sandboxer(item, i, mid); // generate variableMap with current context [item, i, mid]
             result.push({
                 type: 'pfc',
-                value: pfcCompiler.executeAST(pfcAst, variableMap)
+                value: pfcCompiler.executeAST(pfcAst, variableMap),
+                code: item.code
             });
         } else if (type === 'text') {
             result.push(item);

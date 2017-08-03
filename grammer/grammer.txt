@@ -1,5 +1,6 @@
 ARTICLE := REGION
     | REGION ARTICLE
+    | EPSILON
 
 REGION := TEXT
     | startDelimiter TEXT endDelimiter
