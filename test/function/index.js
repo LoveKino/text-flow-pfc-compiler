@@ -3,7 +3,8 @@
 let {
     parseStrToAst,
     executeAST,
-    checkASTWithContext
+    checkASTWithContext,
+    astToSource
 } = require('../..');
 
 let assert = require('assert');
@@ -51,13 +52,19 @@ let testData = [{
 
 describe('index', () => {
     testData.map(({
-        code, result, sandboxer
+        code,
+        result,
+        sandboxer
     }) => {
         it(code, () => {
             let ast = parseStrToAst(code);
             checkASTWithContext(code, sandboxer);
             let ret = executeAST(ast, sandboxer);
+            // check result
             assert.deepEqual(ret, result);
+
+            // recovery
+            assert.equal(astToSource(ast), code);
         });
     });
 });

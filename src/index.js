@@ -6,7 +6,8 @@ let {
     LR
 } = require('syntaxer');
 let {
-    ACTION, GOTO
+    ACTION,
+    GOTO
 } = require('../res/lr1Table');
 let {
     buildFSM
@@ -17,14 +18,17 @@ let {
     stateGraphDSL
 } = FSM;
 let {
-    g, c, left
+    g,
+    c,
+    left
 } = stateGraphDSL;
 
 const DEFAULT_START_DELIMITER = '{:';
 const DEFAULT_END_DELIMITER = ':}';
 
 let getTokenTypes = ({
-    startDelimiter = DEFAULT_START_DELIMITER, endDelimiter = DEFAULT_END_DELIMITER
+    startDelimiter = DEFAULT_START_DELIMITER,
+    endDelimiter = DEFAULT_END_DELIMITER
 } = {}) => {
     if (!startDelimiter || typeof startDelimiter !== 'string') {
         throw new Error(`missing string start delimiter, check options. Current start delimiter is ${startDelimiter}`);
@@ -126,13 +130,13 @@ let executeAST = (mid, sandboxer = noop) => {
     return result;
 };
 
-let checkASTWithContext = (mid, sandboxer = noop) => {
-    for (let i = 0; i < mid.length; i++) {
-        let item = mid[i];
+let checkASTWithContext = (ast, sandboxer = noop) => {
+    for (let i = 0; i < ast.length; i++) {
+        let item = ast[i];
         let type = item.type;
         if (type === 'pfc') {
             let pfcAst = item.pfcAst;
-            let variableMap = sandboxer(item, i, mid); // generate variableMap with current context [item, i, mid]
+            let variableMap = sandboxer(item, i, ast); // generate variableMap with current context [item, i, mid]
             pfcCompiler.checkASTWithContext(pfcAst, variableMap);
         }
     }
@@ -154,9 +158,28 @@ let getProductionId = (production) => {
 
 const noop = () => {};
 
+let astToSource = (ast, {
+    startDelimiter = DEFAULT_START_DELIMITER,
+    endDelimiter = DEFAULT_END_DELIMITER
+} = {}) => {
+    let source = '';
+    for (let i = 0; i < ast.length; i++) {
+        let item = ast[i];
+        let type = item.type;
+        if (type === 'pfc') {
+            source += startDelimiter + item.code + endDelimiter;
+        } else if (type === 'text') {
+            source += item.text;
+        }
+    }
+
+    return source;
+};
+
 module.exports = {
     parser,
     parseStrToAst,
     executeAST,
-    checkASTWithContext
+    checkASTWithContext,
+    astToSource
 };
